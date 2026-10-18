@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Al-ʿArabiyya bayna Yadayk 1 – Sprech-Trainer</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#4C4128">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bayna Yadayk">
+<meta name="mobile-web-app-capable" content="yes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F0E4C4; --bg-blob:#DCE6B8;
+    --card:#F8F0DC; --border:#E2D0A0;
+    --text:#382C16; --text-dim:#8C7A50;
+    --dark:#4C4128; --dark2:#2E2515; --dark-text:#FBF2DC;
+    --tan:#DCC488; --tan2:#CDAD6C;
+    --gold:#D2A84E; --gold-light:#E5C378; --gold-text:#3E2E10;
+    --green:#7B9450; --green-bg:#E6EAD2; --green-text:#2A3316;
+    --red:#C06238; --red-bg:#F6E3D3; --red-text:#4A2311;
+    --shadow: 0 14px 34px -16px rgba(76,65,40,.3);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#211C10; --bg-blob:#2E2A16;
+      --card:#2A2415; --border:#413419;
+      --text:#F3E7CB; --text-dim:#B5A273;
+      --dark:#3A3018; --dark2:#1C1709; --dark-text:#F3E7CB;
+      --tan:#3C3117; --tan2:#4A3C1E;
+      --gold:#E0B968; --gold-light:#EFD08C; --gold-text:#2A1D08;
+      --green:#93AC69; --green-bg:#2C3820; --green-text:#E7EED6;
+      --red:#D47C52; --red-bg:#402A1C; --red-text:#F8E4D3;
+      --shadow: 0 14px 34px -16px rgba(0,0,0,.6);
+    }
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 100% -10%, var(--bg-blob) 0%, transparent 42%),
+      radial-gradient(circle at -10% 30%, var(--bg-blob) 0%, transparent 38%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    min-height:100vh; padding:18px; padding-bottom:60px;
+    padding-top:max(18px, env(safe-area-inset-top));
+  }
+  .ar{ font-family:'Noto Naskh Arabic','Amiri','Traditional Arabic',serif; direction:rtl; unicode-bidi:isolate; }
+  .wrap{ max-width:760px; margin:0 auto; }
+  header{ text-align:center; margin-bottom:16px; }
+  header h1{ font-size:1.3rem; margin:0 0 2px; font-weight:800; letter-spacing:.01em; }
+  header .sub{ margin:0; color:var(--text-dim); font-size:.82rem; font-weight:500; }
+  header .ar-title{ font-size:1.25rem; color:var(--gold); font-weight:700; }
+
+  .panel{ background:var(--card); border:1px solid var(--border); border-radius:24px; padding:16px 18px; margin-bottom:14px; box-shadow:var(--shadow); position:relative; overflow:hidden; }
+  .panel h2{ font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--text-dim); margin:0 0 10px; font-weight:700; }
+  .panel h2 .right{ float:right; text-transform:none; letter-spacing:0; }
+
+  .hero{ background:linear-gradient(150deg, var(--dark), var(--dark2)); border-color:var(--dark2); color:var(--dark-text); }
+  .hero::before{
+    content:""; position:absolute; top:14px; inset-inline-end:14px; width:34px; height:34px; opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23E3C271' stroke-width='1.4'%3E%3Cpath d='M20 2 L24 16 L38 20 L24 24 L20 38 L16 24 L2 20 L16 16 Z'/%3E%3Ccircle cx='20' cy='20' r='5'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:contain; background-repeat:no-repeat; pointer-events:none;
+  }
+  .hero::after{
+    content:""; position:absolute; bottom:-30px; inset-inline-start:-30px; width:120px; height:120px; opacity:.06;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23F5EACC' stroke-width='1.2'%3E%3Cpath d='M20 2 L24 16 L38 20 L24 24 L20 38 L16 24 L2 20 L16 16 Z'/%3E%3Ccircle cx='20' cy='20' r='9'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:contain; background-repeat:no-repeat; pointer-events:none;
+  }
+
+  .row{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .row + .row{ margin-top:10px; }
+  .spacer{ flex:1; }
+
+  /* Einheiten-Kacheln */
+  .units{ display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; }
+  @media (max-width:560px){ .units{ grid-template-columns:repeat(2, 1fr); } }
+  .unit{ background:var(--tan); border:1px solid var(--border); border-radius:14px; padding:9px 8px 8px; cursor:pointer; text-align:center;
+    color:var(--text-dim); user-select:none; transition:.15s; position:relative; }
+  .unit .num{ font-size:.66rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+  .unit .uar{ display:block; font-size:1.02rem; font-weight:700; color:var(--text); line-height:1.5; margin:2px 0 0; }
+  .unit .ude{ display:block; font-size:.68rem; font-weight:600; }
+  .unit.on{ border-color:var(--gold); background:linear-gradient(160deg, var(--gold-light), var(--tan2)); color:var(--gold-text); }
+  .unit.on .uar{ color:var(--gold-text); }
+  .unit .badge-err{ position:absolute; top:5px; inset-inline-end:6px; background:var(--red); color:#fff; border-radius:9px; font-size:.6rem; font-weight:800; padding:1px 6px; }
+
+  .btn{ border:none; border-radius:13px; padding:10px 17px; font-family:inherit; font-size:.85rem; font-weight:700; cursor:pointer; }
+  .btn-accent{ background:linear-gradient(135deg, var(--gold-light), var(--gold)); color:var(--gold-text); box-shadow:0 6px 16px -6px rgba(150,110,20,.6); }
+  .btn-ghost{ background:var(--tan); color:var(--text); border:1px solid var(--border); }
+  .btn-small{ padding:6px 11px; font-size:.75rem; border-radius:10px; }
+  .btn:active{ transform:scale(.97); }
+  .btn:disabled{ opacity:.4; cursor:default; }
+  .hero .btn-ghost{ background:rgba(245,234,204,.12); color:var(--dark-text); border-color:rgba(245,234,204,.25); }
+
+  /* Modus-Karten */
+  .modes{ display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; }
+  .mode{ background:linear-gradient(150deg, var(--dark), var(--dark2)); color:var(--dark-text); border-radius:20px; padding:16px 16px 14px; cursor:pointer;
+    border:1px solid var(--dark2); box-shadow:var(--shadow); text-align:start; font-family:inherit; position:relative; overflow:hidden; }
+  .mode:active{ transform:scale(.98); }
+  .mode .t{ font-weight:800; font-size:1rem; display:block; }
+  .mode .ar{ display:block; color:var(--gold-light); font-size:1.1rem; margin:2px 0 4px; text-align:start; }
+  .mode .d{ display:block; font-size:.74rem; opacity:.72; line-height:1.4; }
+  .mode .cnt{ position:absolute; top:12px; inset-inline-end:14px; font-size:.68rem; font-weight:800; color:var(--gold-light); opacity:.9; }
+  .mode.err{ background:linear-gradient(150deg, #7A3A20, #4A2311); border-color:#4A2311; }
+  .mode:disabled{ opacity:.45; cursor:default; }
+  @media (max-width:480px){ .modes{ grid-template-columns:1fr; } }
+
+  /* Schalter */
+  .toggles{ display:flex; flex-direction:column; gap:8px; }
+  .tgl{ display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:.84rem; font-weight:600; cursor:pointer; user-select:none; }
+  .tgl small{ display:block; color:var(--text-dim); font-weight:500; font-size:.72rem; }
+  .sw{ width:44px; height:26px; border-radius:20px; background:var(--tan2); position:relative; flex-shrink:0; transition:.2s; border:1px solid var(--border); }
+  .sw::after{ content:""; position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%; background:#fff; transition:.2s; box-shadow:0 1px 3px rgba(0,0,0,.25); }
+  .tgl.on .sw{ background:var(--green); }
+  .tgl.on .sw::after{ left:20px; }
+
+  /* Liste (Dialogauswahl) */
+  .list{ display:flex; flex-direction:column; gap:8px; }
+  .item{ display:flex; align-items:center; gap:10px; background:var(--tan); border:1px solid var(--border); border-radius:14px; padding:10px 12px; cursor:pointer; }
+  .item:hover{ border-color:var(--gold); }
+  .item .ut{ font-size:.64rem; font-weight:800; color:var(--text-dim); text-transform:uppercase; letter-spacing:.05em; }
+  .item .it{ font-weight:700; font-size:.9rem; }
+  .item .meta{ font-size:.72rem; color:var(--text-dim); }
+  .roles{ display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
+  .role{ background:var(--card); border:1px solid var(--border); border-radius:10px; padding:6px 10px; font-size:.78rem; font-weight:700; cursor:pointer; font-family:inherit; color:var(--text); }
+  .role:hover{ border-color:var(--gold); background:var(--gold-light); color:var(--gold-text); }
+
+  /* Top-Leiste in der Übung */
+  .topbar{ display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+  .topbar .title{ flex:1; min-width:0; font-weight:700; font-size:.88rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .progressbar{ height:7px; background:var(--tan); border-radius:6px; overflow:hidden; margin:-4px 0 14px; border:1px solid var(--border); }
+  .progressbar > div{ height:100%; background:linear-gradient(90deg, var(--gold-light), var(--gold)); transition:width .3s; }
+
+  /* Chatverlauf */
+  .chat{ display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+  .bubble{ max-width:88%; border-radius:18px; padding:9px 13px; box-shadow:0 6px 14px -10px rgba(0,0,0,.35); }
+  .bubble .who{ font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.06em; opacity:.65; display:block; }
+  .bubble .bar{ font-size:1.18rem; line-height:1.75; display:block; }
+  .bubble .bde{ font-size:.75rem; opacity:.75; display:block; margin-top:1px; }
+  .bubble.them{ align-self:flex-start; background:var(--card); border:1px solid var(--border); border-top-left-radius:6px; }
+  .bubble.me{ align-self:flex-end; background:var(--gold-light); color:var(--gold-text); border-top-right-radius:6px; }
+  .bubble.me.wrong{ background:var(--red-bg); color:var(--red-text); }
+
+  /* Übungskarte */
+  .quiz{ text-align:center; padding:22px 18px 20px; }
+  .badges{ display:flex; justify-content:center; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+  .badge{ font-size:.63rem; text-transform:uppercase; letter-spacing:.05em; font-weight:700; color:var(--gold-light);
+    background:rgba(227,194,113,.14); border:1px solid rgba(227,194,113,.35); border-radius:7px; padding:3px 8px; }
+  .badge.p{ color:#BFD79A; border-color:rgba(191,215,154,.4); background:rgba(191,215,154,.12); }
+  .q-ar{ font-size:1.75rem; font-weight:700; color:var(--gold-light); line-height:1.7; }
+  .q-de{ font-size:.85rem; opacity:.65; margin-top:2px; }
+  .task{ font-size:.7rem; text-transform:uppercase; letter-spacing:.07em; opacity:.6; font-weight:700; margin-top:14px; }
+  .de-big{ font-size:1.18rem; font-weight:600; margin-top:4px; line-height:1.45; }
+  .hint{ font-size:.74rem; opacity:.7; margin-top:8px; font-style:italic; }
+  .answerzone{ min-height:120px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; margin-top:16px; }
+  .reveal-btn{ background:linear-gradient(135deg, var(--gold-light), var(--gold)); color:var(--gold-text); border:none; border-radius:16px; padding:15px 30px; font-family:inherit; font-size:1rem;
+    font-weight:700; cursor:pointer; box-shadow:0 10px 22px -8px rgba(0,0,0,.4); }
+  .answer-ar{ font-size:1.7rem; font-weight:700; color:var(--gold-light); line-height:1.8; }
+  .answer-de{ font-size:.82rem; opacity:.7; margin-top:-6px; }
+  .gradebtns{ display:flex; gap:12px; margin-top:4px; flex-wrap:wrap; justify-content:center; }
+  .gradebtn{ border:none; border-radius:16px; padding:13px 26px; font-family:inherit; font-size:.95rem; font-weight:700; cursor:pointer; min-width:120px; }
+  .gradebtn.ok{ background:var(--green); color:var(--green-text); }
+  .gradebtn.no{ background:var(--red); color:var(--red-text); }
+  .listen{ background:rgba(245,234,204,.12); color:var(--dark-text); border:1px solid rgba(245,234,204,.25); border-radius:11px; padding:6px 12px;
+    font-family:inherit; font-size:.75rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
+  .listen svg{ width:14px; height:14px; }
+
+  textarea.typed{ width:100%; max-width:520px; min-height:62px; border-radius:14px; border:1px solid rgba(245,234,204,.3); background:rgba(245,234,204,.1);
+    color:var(--dark-text); font-size:1.3rem; padding:10px 14px; resize:vertical; font-family:'Noto Naskh Arabic',serif; direction:rtl; outline:none; }
+  textarea.typed:focus{ border-color:var(--gold-light); }
+  .typed-show{ font-size:1.15rem; padding:6px 14px; border-radius:12px; background:rgba(245,234,204,.08); }
+  .cmp{ font-size:.78rem; font-weight:700; border-radius:9px; padding:4px 10px; }
+  .cmp.good{ background:rgba(147,172,105,.25); color:#CFE3AD; }
+  .cmp.bad{ background:rgba(212,124,82,.22); color:#F4C2A6; }
+  .diff-miss{ color:#FF9E7A; text-decoration:underline; text-decoration-thickness:2px; }
+
+  .summary .score{ font-size:2.4rem; font-weight:800; margin:6px 0; }
+  .summary .score .ok{ color:var(--green); filter:brightness(1.3); }
+  .summary-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px; }
+
+  .stats{ display:flex; gap:14px; font-size:.78rem; color:var(--text-dim); font-weight:500; justify-content:center; margin-top:10px; flex-wrap:wrap; }
+  .stats b{ color:var(--text); }
+  .muted{ color:var(--text-dim); font-size:.8rem; }
+  .err-list .item{ cursor:default; flex-direction:column; align-items:stretch; gap:2px; }
+  .err-list .item .bar{ font-size:1.05rem; }
+  .err-list .item .row{ margin-top:4px; }
+  .footer{ text-align:center; color:var(--text-dim); font-size:.7rem; margin-top:18px; line-height:1.5; }
+
+  @media (max-width:480px){
+    .q-ar{ font-size:1.45rem; }
+    .answer-ar{ font-size:1.4rem; }
+    .bubble .bar{ font-size:1.08rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script src="data.js"></script>
+<script>
+/* =========================================================
+   1) HILFSFUNKTIONEN
+========================================================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function shuffle(a){ a=[...a]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const UNIT = id => UNITS.find(u=>u.id===id);
+const AR_NUM = n => String(n).replace(/\d/g, d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+
+/* Arabisch vergleichen: Vokalzeichen, Tatwil, Satzzeichen und Hamza-Varianten ignorieren */
+function normAr(s){
+  return s.replace(/[ً-ٰٟـ]/g,'')
+          .replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/ؤ/g,'و').replace(/ئ/g,'ي')
+          .replace(/[.,،؛;:!?؟«»"'()\-–…ﷺ]/g,' ')
+          .replace(/\s+/g,' ').trim();
+}
+function compareAr(typed, target){
+  const a = normAr(typed).split(' ').filter(Boolean);
+  const b = normAr(target).split(' ').filter(Boolean);
+  const exact = a.join(' ')===b.join(' ');
+  // welche Zielwörter fehlen in der Eingabe?
+  const pool = [...a]; const missing = new Set();
+  b.forEach((w,i)=>{ const k = pool.indexOf(w); if(k>=0) pool.splice(k,1); else missing.add(i); });
+  return { exact, missing, total:b.length, hit:b.length-missing.size };
+}
+function markMissing(target, missing){
+  // markiert fehlende Wörter im (vokalisierten) Zieltext
+  let idx = 0;
+  return target.split(/(\s+)/).map(tok=>{
+    if(/^\s+$/.test(tok)) return tok;
+    if(!normAr(tok)) return esc(tok);
+    const out = missing.has(idx) ? `<span class="diff-miss">${esc(tok)}</span>` : esc(tok);
+    idx++; return out;
+  }).join('');
+}
+
+/* Vorlesen (Browser-Sprachausgabe, falls arabische Stimme vorhanden) */
+let arVoice = null;
+function pickVoice(){ const v = speechSynthesis.getVoices(); arVoice = v.find(x=>/^ar/i.test(x.lang)) || null; }
+if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text.replace(/ﷺ/g,'صلى الله عليه وسلم'));
+  u.lang = arVoice ? arVoice.lang : 'ar-SA'; if(arVoice) u.voice = arVoice; u.rate = .85;
+  speechSynthesis.speak(u);
+}
+const SPK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>';
+const listenBtn = (text, id) => ('speechSynthesis' in window) ? `<button class="listen" id="${id}" data-say="${esc(text)}">${SPK_ICON} Anhören</button>` : '';
+
+/* =========================================================
+   2) SPEICHER (Einstellungen, Fehlerliste, Statistik)
+========================================================= */
+const STORE_KEY = 'bayna-yadayk-1-v1';
+let store = { units:[1], showDe:true, typing:true, mistakes:{}, stats:{ok:0,no:0} };
+try{ const s = JSON.parse(localStorage.getItem(STORE_KEY)); if(s) store = Object.assign(store, s); }catch(e){}
+function save(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){} }
+
+/* Jedes Übungselement hat einen festen Schlüssel:
+   s|Einheit|Index   (Satz)      q|Einheit|Index (Frage)      d|Einheit|Dialog|Zeile (Dialogzeile) */
+function itemFromKey(key){
+  const [t,u,a,b] = key.split('|'); const unit = UNIT(+u); if(!unit) return null;
+  if(t==='s'){ const s = unit.s[+a]; if(!s) return null; return {key, type:'s', unit:unit.id, ar:s[0], de:s[1]}; }
+  if(t==='q'){ const q = unit.q[+a]; if(!q) return null; return {key, type:'q', unit:unit.id, qar:q[0], qde:q[1], ar:q[2], de:q[3], p:!!q[4]}; }
+  if(t==='d'){ const d = unit.d[+a]; if(!d) return null; const l = d.l[+b]; if(!l) return null;
+    const prev = +b>0 ? d.l[+b-1] : null;
+    return {key, type:'d', unit:unit.id, ar:l[1], de:l[2], who:l[0], dlg:d.t, prevAr:prev?prev[1]:null, prevDe:prev?prev[2]:null, prevWho:prev?prev[0]:null}; }
+  return null;
+}
+function addMistake(key){ store.mistakes[key] = (store.mistakes[key]||0) + 1; save(); }
+function removeMistake(key){ delete store.mistakes[key]; save(); }
+const mistakeKeys = (units) => Object.keys(store.mistakes).filter(k => !units || units.includes(+k.split('|')[1])).filter(k=>itemFromKey(k));
+
+/* =========================================================
+   3) STARTSEITE
+========================================================= */
+let view = 'home';
+let session = null;
+
+function renderHome(){
+  view = 'home';
+  const sel = store.units;
+  const cnt = {d:0,s:0,q:0};
+  sel.forEach(id=>{ const u = UNIT(id); cnt.d += u.d.length; cnt.s += u.s.length; cnt.q += u.q.length; });
+  const errAll = mistakeKeys(null).length;
+  const errSel = mistakeKeys(sel).length;
+  const errPerUnit = {}; mistakeKeys(null).forEach(k=>{ const u = +k.split('|')[1]; errPerUnit[u] = (errPerUnit[u]||0)+1; });
+
+  $('#app').innerHTML = `
+  <header>
+    <div class="ar ar-title">العَرَبِيَّةُ بَيْنَ يَدَيْكَ ١</div>
+    <h1>Sprech-Trainer</h1>
+    <p class="sub">Dialoge, Sätze und Fragen aus dem Buch – Einheit wählen und loslegen</p>
+  </header>
+
+  <div class="panel">
+    <h2>Einheiten <span class="right"><button class="btn btn-ghost btn-small" id="selAll">Alle</button> <button class="btn btn-ghost btn-small" id="selNone">Keine</button></span></h2>
+    <div class="units">
+      ${UNITS.map(u=>`
+        <div class="unit ${sel.includes(u.id)?'on':''}" data-id="${u.id}">
+          ${errPerUnit[u.id]?`<span class="badge-err" title="Fehler in dieser Einheit">${errPerUnit[u.id]}</span>`:''}
+          <span class="num">Einheit ${u.id}</span>
+          <span class="uar ar">${u.ar}</span>
+          <span class="ude">${u.de}</span>
+        </div>`).join('')}
+    </div>
+  </div>
+
+  <div class="modes">
+    <button class="mode" id="mDialog" ${sel.length?'':'disabled'}>
+      <span class="cnt">${cnt.d}</span>
+      <span class="t">Dialoge</span><span class="ar">الحِوارُ</span>
+      <span class="d">Du übernimmst eine Rolle. Dein Gegenüber spricht Arabisch, du antwortest – das Deutsche steht als Hilfe da.</span>
+    </button>
+    <button class="mode" id="mQ" ${sel.length?'':'disabled'}>
+      <span class="cnt">${cnt.q}</span>
+      <span class="t">Fragen beantworten</span><span class="ar">أَجِبْ عَنِ الأَسْئِلَةِ</span>
+      <span class="d">Die Fragen vom Kapitelende: Arabische Frage, du antwortest auf Arabisch.</span>
+    </button>
+    <button class="mode" id="mS" ${sel.length?'':'disabled'}>
+      <span class="cnt">${cnt.s}</span>
+      <span class="t">Sätze übersetzen</span><span class="ar">تَرْجِمْ</span>
+      <span class="d">Deutscher Satz → du sagst/schreibst ihn auf Arabisch. Sätze aus Dialogen, Strukturtabellen und Lesetexten.</span>
+    </button>
+    <button class="mode" id="mMix" ${sel.length?'':'disabled'}>
+      <span class="cnt">${cnt.s+cnt.q}</span>
+      <span class="t">Gemischt</span><span class="ar">مُراجَعَةٌ</span>
+      <span class="d">Sätze und Fragen der gewählten Einheiten durcheinander.</span>
+    </button>
+    <button class="mode err" id="mErr" ${errAll?'':'disabled'} style="grid-column:1/-1">
+      <span class="cnt">${errAll}</span>
+      <span class="t">Fehler wiederholen</span><span class="ar">الأَخْطاءُ</span>
+      <span class="d">${errAll ? `Alles, was du als „Falsch“ markiert hast. ${errSel!==errAll?`(${errSel} davon in den gewählten Einheiten)`:''} Richtig beantwortet → verschwindet aus der Liste.` : 'Noch keine Fehler gespeichert. Alles, was du als „Falsch“ markierst, landet hier.'}</span>
+    </button>
+  </div>
+
+  <div class="panel" style="margin-top:14px">
+    <h2>Einstellungen</h2>
+    <div class="toggles">
+      <div class="tgl ${store.showDe?'on':''}" id="tDe"><div>Deutsch zur arabischen Frage anzeigen<small>Übersetzung unter Fragen und Sätzen deines Gegenübers</small></div><span class="sw"></span></div>
+      <div class="tgl ${store.typing?'on':''}" id="tType"><div>Antwort eintippen<small>Mit arabischer Tastatur schreiben – die App vergleicht ohne Vokalzeichen. Aus: nur laut sprechen.</small></div><span class="sw"></span></div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      ${errAll?'<button class="btn btn-ghost btn-small" id="showErr">Fehlerliste ansehen</button>':''}
+      <span class="spacer"></span>
+      <span class="muted">Gesamt: <b style="color:var(--green)">${store.stats.ok}</b> richtig · <b style="color:var(--red)">${store.stats.no}</b> falsch</span>
+    </div>
+  </div>
+
+  <div class="footer">Alle Inhalte aus „Al-ʿArabiyya bayna Yadayk“, Band 1 · Seitenzahlen bei den Dialogen.<br>Tastatur: Leertaste = Antwort zeigen · R = Richtig · F = Falsch</div>`;
+
+  document.querySelectorAll('.unit').forEach(el=>el.onclick=()=>{
+    const id = +el.dataset.id; const i = store.units.indexOf(id);
+    if(i>=0) store.units.splice(i,1); else store.units.push(id);
+    store.units.sort((a,b)=>a-b); save(); renderHome();
+  });
+  $('#selAll').onclick = ()=>{ store.units = UNITS.map(u=>u.id); save(); renderHome(); };
+  $('#selNone').onclick = ()=>{ store.units = []; save(); renderHome(); };
+  $('#tDe').onclick = ()=>{ store.showDe = !store.showDe; save(); renderHome(); };
+  $('#tType').onclick = ()=>{ store.typing = !store.typing; save(); renderHome(); };
+  $('#mDialog').onclick = renderDialogPicker;
+  $('#mQ').onclick = ()=>startDrill('q');
+  $('#mS').onclick = ()=>startDrill('s');
+  $('#mMix').onclick = ()=>startDrill('mix');
+  $('#mErr').onclick = ()=>startDrill('err');
+  const se = $('#showErr'); if(se) se.onclick = renderErrorList;
+  window.scrollTo(0,0);
+}
+
+/* =========================================================
+   4) DIALOG-AUSWAHL
+========================================================= */
+function renderDialogPicker(){
+  view = 'picker';
+  const blocks = store.units.map(id=>{ const u = UNIT(id);
+    return u.d.map((d,di)=>{
+      const roles = [...new Set(d.l.map(l=>l[0]))];
+      return `<div class="item" style="flex-direction:column;align-items:stretch">
+        <div><span class="ut">Einheit ${u.id} · S. ${d.p}</span><div class="it">${esc(d.t)}</div>
+        <div class="meta">${d.l.length} Zeilen · Wähle deine Rolle:</div></div>
+        <div class="roles">${roles.map(r=>`<button class="role" data-u="${u.id}" data-d="${di}" data-r="${esc(r)}">${esc(r)}</button>`).join('')}
+        <button class="role" data-u="${u.id}" data-d="${di}" data-r="*">Alle Zeilen</button></div>
+      </div>`; }).join('');
+  }).join('');
+  $('#app').innerHTML = `
+    <div class="topbar"><button class="btn btn-ghost btn-small" id="back">← Zurück</button><div class="title">Dialog wählen</div></div>
+    <div class="panel"><h2>Welche Rolle sprichst du?</h2>
+      <p class="muted" style="margin:-4px 0 12px">Dein Gegenüber spricht seine Zeilen auf Arabisch. Für deine Zeilen siehst du das Deutsche und antwortest auf Arabisch. „Alle Zeilen“ = du sprichst jede Zeile selbst.</p>
+      <div class="list">${blocks}</div>
+    </div>`;
+  $('#back').onclick = renderHome;
+  document.querySelectorAll('.role').forEach(b=>b.onclick=()=>startDialog(+b.dataset.u, +b.dataset.d, b.dataset.r));
+  window.scrollTo(0,0);
+}
+
+/* =========================================================
+   5) DIALOG-MODUS
+========================================================= */
+function startDialog(unitId, dIdx, role){
+  const d = UNIT(unitId).d[dIdx];
+  session = { kind:'dialog', unitId, dIdx, role, d, pos:0, stage:0, ok:0, no:0, tries:0, history:[], typed:'' };
+  advanceDialog();
+}
+function isMine(line){ return session.role==='*' || line[0]===session.role; }
+function advanceDialog(){
+  // Zeilen des Gegenübers automatisch in den Verlauf übernehmen
+  const s = session;
+  while(s.pos < s.d.l.length && !isMine(s.d.l[s.pos])){
+    s.history.push({me:false, line:s.d.l[s.pos]}); s.pos++;
+  }
+  s.stage = 0; s.typed = ''; s.tries = 0;
+  renderDialog();
+  const last = s.history[s.history.length-1];
+  if(last && !last.me && s.autoSpeak) speak(last.line[1]);
+}
+function renderDialog(){
+  view = 'dialog';
+  const s = session, d = s.d, done = s.pos >= d.l.length;
+  const mineTotal = d.l.filter(isMine).length;
+  const mineDone = d.l.slice(0, s.pos).filter(isMine).length;
+  const chat = s.history.map((h,i)=>{
+    const l = h.line;
+    if(!h.me) return `<div class="bubble them"><span class="who">${esc(l[0])}</span><span class="bar ar">${l[1]}</span>${store.showDe?`<span class="bde">${esc(l[2])}</span>`:''}</div>`;
+    return `<div class="bubble me ${h.wrong?'wrong':''}"><span class="who">Du (${esc(l[0])})</span><span class="bar ar">${l[1]}</span><span class="bde">${esc(l[2])}</span></div>`;
+  }).join('');
+
+  let card = '';
+  if(done){
+    card = `<div class="panel hero quiz summary">
+      <div style="font-weight:700">${esc(d.t)}</div>
+      <div class="score"><span class="ok">${s.ok}</span> / ${mineTotal}</div>
+      <div style="opacity:.7;font-size:.85rem">${s.ok} beim ersten Versuch richtig · ${s.no} Mal falsch</div>
+      <div class="summary-actions">
+        <button class="btn btn-ghost" id="again">Nochmal</button>
+        <button class="btn btn-ghost" id="other">Andere Rolle / Dialog</button>
+        <button class="btn btn-accent" id="home">Startseite</button>
+      </div></div>`;
+  } else {
+    const line = d.l[s.pos];
+    const head = `<div class="badges"><span class="badge">Du bist: ${esc(line[0])}</span>${s.tries?`<span class="badge" style="color:#F4C2A6">Versuch ${s.tries+1}</span>`:''}</div>
+      <div class="task">Sag das auf Arabisch</div>
+      <div class="de-big">${esc(line[2])}</div>`;
+    card = `<div class="panel hero quiz">${head}${answerZone(line[1], null)}</div>`;
+  }
+  $('#app').innerHTML = `
+    <div class="topbar"><button class="btn btn-ghost btn-small" id="back">← Zurück</button><div class="title">Einheit ${s.unitId} · ${esc(d.t)}</div>
+      <button class="btn btn-ghost btn-small" id="auto" title="Zeilen des Gegenübers automatisch vorlesen">${s.autoSpeak?'Vorlesen: an':'Vorlesen: aus'}</button></div>
+    <div class="progressbar"><div style="width:${mineTotal?Math.round(mineDone/mineTotal*100):100}%"></div></div>
+    <div class="chat">${chat}</div>
+    ${card}
+    <div class="stats"><span>Richtig: <b>${s.ok}</b></span><span>Falsch: <b>${s.no}</b></span><span>Zeile ${Math.min(mineDone+1,mineTotal)} / ${mineTotal}</span></div>`;
+
+  $('#back').onclick = renderDialogPicker;
+  $('#auto').onclick = ()=>{ s.autoSpeak = !s.autoSpeak; renderDialog(); };
+  document.querySelectorAll('.bubble.them .bar').forEach(b=>{ b.style.cursor='pointer'; b.title='Antippen zum Anhören'; b.onclick=()=>speak(b.textContent); });
+  if(done){
+    $('#again').onclick = ()=>startDialog(s.unitId, s.dIdx, s.role);
+    $('#other').onclick = renderDialogPicker;
+    $('#home').onclick = renderHome;
+  } else {
+    wireAnswer(d.l[s.pos][1], ok=>{
+      const key = `d|${s.unitId}|${s.dIdx}|${s.pos}`;
+      if(ok){
+        if(s.tries===0) s.ok++;
+        store.stats.ok++; if(s.tries===0) removeMistake(key);
+        s.history.push({me:true, line:d.l[s.pos], wrong:s.tries>0}); s.pos++; save(); advanceDialog();
+      } else {
+        s.no++; s.tries++; store.stats.no++; addMistake(key);
+        s.stage = 0; s.typed = ''; renderDialog();   // gleiche Zeile nochmal
+      }
+    }, renderDialog);
+  }
+  const chatEl = document.querySelector('.chat'); const last = chatEl && chatEl.lastElementChild;
+  if(last) last.scrollIntoView({block:'nearest'});
+}
+
+/* =========================================================
+   6) ANTWORT-BEREICH (gemeinsam für alle Modi)
+========================================================= */
+function answerZone(target, deAnswer){
+  const s = session;
+  if(s.stage===0){
+    return `<div class="answerzone">
+      ${store.typing?`<textarea class="typed ar" id="typed" placeholder="اُكْتُبْ هُنا…" lang="ar" dir="rtl" autocomplete="off" autocorrect="off" spellcheck="false">${esc(s.typed)}</textarea>`:''}
+      <button class="reveal-btn" id="reveal">Antwort zeigen</button>
+    </div>`;
+  }
+  let cmp = '';
+  let shown = target;
+  if(store.typing && s.typed.trim()){
+    const r = compareAr(s.typed, target);
+    cmp = `<div class="typed-show ar">${esc(s.typed)}</div>` +
+      (r.exact ? `<span class="cmp good">✓ Stimmt überein (ohne Vokalzeichen)</span>`
+               : `<span class="cmp bad">${r.hit} von ${r.total} Wörtern getroffen – unterstrichen = fehlt/anders</span>`);
+    if(!r.exact) shown = markMissing(target, r.missing);
+    else shown = esc(target);
+  } else shown = esc(target);
+  return `<div class="answerzone">
+    ${cmp}
+    <div class="answer-ar ar">${shown}</div>
+    ${deAnswer?`<div class="answer-de">${esc(deAnswer)}</div>`:''}
+    ${listenBtn(target,'say')}
+    <div class="gradebtns">
+      <button class="gradebtn no" id="no">✗ Falsch</button>
+      <button class="gradebtn ok" id="ok">✓ Richtig</button>
+    </div>
+  </div>`;
+}
+function wireAnswer(target, onGrade, rerender){
+  const s = session;
+  const ta = $('#typed');
+  if(ta){
+    ta.oninput = ()=>{ s.typed = ta.value; };
+    ta.onkeydown = e=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); s.typed = ta.value; s.stage = 1; rerender(); } };
+    if(window.matchMedia('(min-width:700px)').matches) ta.focus();
+  }
+  const rv = $('#reveal'); if(rv) rv.onclick = ()=>{ if(ta) s.typed = ta.value; s.stage = 1; rerender(); };
+  const ok = $('#ok'), no = $('#no');
+  if(ok) ok.onclick = ()=>onGrade(true);
+  if(no) no.onclick = ()=>onGrade(false);
+  document.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>speak(b.dataset.say));
+}
+
+/* =========================================================
+   7) DRILL-MODUS (Sätze / Fragen / Gemischt / Fehler)
+========================================================= */
+function buildQueue(kind){
+  const keys = [];
+  if(kind==='err') return shuffle(mistakeKeys(null));
+  store.units.forEach(id=>{ const u = UNIT(id);
+    if(kind==='s'||kind==='mix') u.s.forEach((_,i)=>keys.push(`s|${id}|${i}`));
+    if(kind==='q'||kind==='mix') u.q.forEach((_,i)=>keys.push(`q|${id}|${i}`));
+  });
+  return shuffle(keys);
+}
+const KIND_NAME = { s:'Sätze übersetzen', q:'Fragen beantworten', mix:'Gemischt', err:'Fehler wiederholen' };
+
+function startDrill(kind){
+  const queue = buildQueue(kind);
+  if(!queue.length) return;
+  session = { kind:'drill', mode:kind, queue, total:queue.length, done:0, pos:0, stage:0, ok:0, no:0, typed:'', wrongKeys:new Set(), retry:{} };
+  renderDrill();
+}
+function renderDrill(){
+  view = 'drill';
+  const s = session;
+  if(s.pos >= s.queue.length) return renderDrillSummary();
+  const it = itemFromKey(s.queue[s.pos]);
+  if(!it){ s.pos++; return renderDrill(); }
+  const isRetry = s.retry[it.key];
+
+  let prompt = '';
+  const badges = `<div class="badges"><span class="badge">Einheit ${it.unit}</span>
+    <span class="badge">${it.type==='q'?'Frage':it.type==='s'?'Satz':'Dialogzeile'}</span>
+    ${it.p?'<span class="badge p">persönlich – eigene Antwort ok</span>':''}
+    ${isRetry?'<span class="badge" style="color:#F4C2A6">Wiederholung</span>':''}</div>`;
+  if(it.type==='q'){
+    prompt = `${badges}<div class="q-ar ar">${it.qar}</div>
+      ${store.showDe?`<div class="q-de">${esc(it.qde)}</div>`:''}
+      <div style="margin-top:8px">${listenBtn(it.qar,'sayq')}</div>
+      <div class="task">Antworte auf Arabisch</div>
+      <div class="de-big">${esc(it.de)}</div>
+      ${it.p?'<div class="hint">Persönliche Frage: Die Musterantwort ist die aus dem Buch – du kannst auch mit deinen eigenen Angaben antworten.</div>':''}`;
+  } else if(it.type==='d'){
+    prompt = `${badges}<div class="muted" style="color:var(--dark-text);opacity:.6;font-size:.75rem">${esc(it.dlg)}</div>
+      ${it.prevAr?`<div class="q-ar ar" style="font-size:1.3rem">${it.prevAr}</div>${store.showDe?`<div class="q-de">${esc(it.prevDe)}</div>`:''}`:''}
+      <div class="task">Du (${esc(it.who)}) sagst</div>
+      <div class="de-big">${esc(it.de)}</div>`;
+  } else {
+    prompt = `${badges}<div class="task" style="margin-top:4px">Übersetze ins Arabische</div>
+      <div class="de-big" style="font-size:1.3rem">${esc(it.de)}</div>`;
+  }
+
+  $('#app').innerHTML = `
+    <div class="topbar"><button class="btn btn-ghost btn-small" id="back">← Zurück</button><div class="title">${KIND_NAME[s.mode]}</div>
+      <span class="muted">${s.done} / ${s.total}</span></div>
+    <div class="progressbar"><div style="width:${Math.round(s.done/s.total*100)}%"></div></div>
+    <div class="panel hero quiz">${prompt}${answerZone(it.ar, null)}</div>
+    <div class="stats"><span>Richtig: <b>${s.ok}</b></span><span>Falsch: <b>${s.no}</b></span>${s.mode==='err'?`<span>Noch in der Fehlerliste: <b>${mistakeKeys(null).length}</b></span>`:''}</div>`;
+
+  $('#back').onclick = renderHome;
+  wireAnswer(it.ar, ok=>{
+    if(ok){
+      store.stats.ok++; s.done++;
+      // beim ersten Versuch richtig → zählt als richtig und fliegt aus der Fehlerliste
+      if(!s.retry[it.key]){ s.ok++; removeMistake(it.key); }
+    } else {
+      store.stats.no++; s.no++; s.wrongKeys.add(it.key); addMistake(it.key);
+      // gleiche Karte ein paar Karten später nochmal einschieben
+      s.retry[it.key] = true;
+      s.queue.splice(Math.min(s.pos + 4, s.queue.length), 0, it.key);
+    }
+    save();
+    s.pos++; s.stage = 0; s.typed = '';
+    renderDrill();
+  }, renderDrill);
+}
+function renderDrillSummary(){
+  const s = session;
+  const wrong = [...s.wrongKeys].map(itemFromKey).filter(Boolean);
+  $('#app').innerHTML = `
+    <div class="topbar"><button class="btn btn-ghost btn-small" id="back">← Startseite</button><div class="title">${KIND_NAME[s.mode]} – fertig</div></div>
+    <div class="panel hero quiz summary">
+      <div class="score"><span class="ok">${s.ok}</span> / ${s.total}</div>
+      <div style="opacity:.7;font-size:.85rem">beim ersten Versuch richtig · ${s.wrongKeys.size} Karte(n) mit Fehlern</div>
+      <div class="summary-actions">
+        <button class="btn btn-ghost" id="again">Nochmal (neu gemischt)</button>
+        ${mistakeKeys(null).length?'<button class="btn btn-ghost" id="errs">Fehler wiederholen</button>':''}
+        <button class="btn btn-accent" id="home">Startseite</button>
+      </div>
+    </div>
+    ${wrong.length?`<div class="panel err-list"><h2>Das hat diesmal nicht geklappt</h2><div class="list">${wrong.map(errItemHtml).join('')}</div></div>`:''}`;
+  $('#back').onclick = renderHome; $('#home').onclick = renderHome;
+  $('#again').onclick = ()=>startDrill(s.mode);
+  const e = $('#errs'); if(e) e.onclick = ()=>startDrill('err');
+  document.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>speak(b.dataset.say));
+}
+function errItemHtml(it){
+  const ctx = it.type==='q' ? `<span class="ar" style="font-size:.95rem;color:var(--text-dim)">${it.qar}</span>` :
+              it.type==='d' ? `<span class="meta">${esc(it.dlg)}</span>` : '';
+  return `<div class="item"><span class="ut">Einheit ${it.unit} · ${it.type==='q'?'Frage':it.type==='s'?'Satz':'Dialog'}${store.mistakes[it.key]?` · ${store.mistakes[it.key]}× falsch`:''}</span>
+    ${ctx}<span class="bar ar">${it.ar}</span><span class="meta">${esc(it.de)}</span></div>`;
+}
+
+/* =========================================================
+   8) FEHLERLISTE
+========================================================= */
+function renderErrorList(){
+  view = 'errors';
+  const items = mistakeKeys(null).map(itemFromKey).filter(Boolean).sort((a,b)=>a.unit-b.unit);
+  $('#app').innerHTML = `
+    <div class="topbar"><button class="btn btn-ghost btn-small" id="back">← Zurück</button><div class="title">Fehlerliste (${items.length})</div>
+      <button class="btn btn-accent btn-small" id="go" ${items.length?'':'disabled'}>Üben</button></div>
+    <div class="panel err-list"><div class="list">${items.map(it=>errItemHtml(it).replace('</div>',`<div class="row"><button class="btn btn-ghost btn-small" data-del="${it.key}">Entfernen</button></div></div>`)).join('') || '<p class="muted">Keine Fehler gespeichert.</p>'}</div>
+      ${items.length?'<div class="row" style="margin-top:12px"><span class="spacer"></span><button class="btn btn-ghost btn-small" id="clear">Alle löschen</button></div>':''}</div>`;
+  $('#back').onclick = renderHome;
+  $('#go').onclick = ()=>startDrill('err');
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{ removeMistake(b.dataset.del); renderErrorList(); });
+  const c = $('#clear'); if(c) c.onclick = ()=>{ if(c.dataset.sure){ store.mistakes = {}; save(); renderErrorList(); } else { c.dataset.sure='1'; c.textContent='Wirklich alle löschen?'; } };
+}
+
+/* =========================================================
+   9) TASTATUR & START
+========================================================= */
+document.addEventListener('keydown', e=>{
+  const inText = e.target && e.target.tagName==='TEXTAREA';
+  if(!inText && (e.code==='Space' || e.key==='Enter')){
+    const rv = $('#reveal'); if(rv){ e.preventDefault(); rv.click(); }
+  } else if(!inText && e.key.toLowerCase()==='r'){ const b = $('#ok'); if(b) b.click(); }
+  else if(!inText && e.key.toLowerCase()==='f'){ const b = $('#no'); if(b) b.click(); }
+});
+
+renderHome();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); });
+}
+</script>
+</body>
+</html>
