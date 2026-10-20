@@ -8,7 +8,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#0E6F78">
+<meta name="theme-color" content="#6B5434">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Bayna Yadayk">
@@ -18,30 +18,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F4F8F7; --bg-blob:#CFF1EA; --bg-blob2:#FFE1D2;
-    --card:#FFFFFF; --border:#E2ECE9;
-    --text:#173836; --text-dim:#5F7F7B;
-    --dark:#14A08F; --dark2:#0E6F78; --dark-text:#F2FFFC;
-    --tan:#EEF6F4; --tan2:#D4EDE7;
-    --gold:#F59E0B; --gold-light:#FFD166; --gold-text:#3D2500;
-    --green:#2FBF71; --green-bg:#DDF7E8; --green-text:#063D21;
-    --red:#F2685B; --red-bg:#FFE6E2; --red-text:#5C140D;
-    --m1a:#16B3A0; --m1b:#0E7C86;   /* Dialoge */
-    --m2a:#7C6CF2; --m2b:#4F46C8;   /* Fragen */
-    --m3a:#FF8A5B; --m3b:#E8573F;   /* Sätze */
-    --m4a:#F25C84; --m4b:#C2325E;   /* Fehler */
-    --shadow: 0 14px 34px -18px rgba(14,111,120,.35);
+    --bg:#F6EFE0; --bg-blob:#E2EDCC; --bg-blob2:#F3DFBE;
+    --card:#FFFBF2; --border:#E8DCC2;
+    --text:#3A2E1A; --text-dim:#8A7652;
+    --dark:#6B5434; --dark2:#45351E; --dark-text:#FFF8EA;
+    --tan:#F2E7D0; --tan2:#E3D1AA;
+    --gold:#D9A441; --gold-light:#EEC872; --gold-text:#3E2A08;
+    --green:#5E9E4A; --green-bg:#E4F1DA; --green-text:#183010;
+    --red:#D93A2B; --red-bg:#FBE1DC; --red-text:#5A120A;
+    --m1a:#8A6A3E; --m1b:#5A4426;   /* Dialoge – Braun */
+    --m2a:#6FA352; --m2b:#3F7334;   /* Fragen – Grün */
+    --m3a:#C9913F; --m3b:#9A6726;   /* Sätze – Karamell */
+    --m4a:#E0503F; --m4b:#B02A1E;   /* Fehler – Rot */
+    --shadow: 0 14px 34px -18px rgba(90,68,38,.35);
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --bg:#0D1A1D; --bg-blob:#103B3A; --bg-blob2:#3A2320;
-      --card:#152629; --border:#24403F;
-      --text:#E8F6F3; --text-dim:#93B4AF;
-      --dark:#11806F; --dark2:#0A4E56; --dark-text:#F2FFFC;
-      --tan:#1B3133; --tan2:#22494A;
-      --gold:#FBBF24; --gold-light:#FFD978; --gold-text:#2E1C00;
-      --green:#3DD487; --green-bg:#173C2B; --green-text:#E2FBEE;
-      --red:#FF7C70; --red-bg:#43201C; --red-text:#FFE6E2;
+      --bg:#1E1A12; --bg-blob:#26301C; --bg-blob2:#33281A;
+      --card:#2A241A; --border:#42372A;
+      --text:#F3EAD7; --text-dim:#B9A783;
+      --dark:#5A4628; --dark2:#2E2414; --dark-text:#FFF8EA;
+      --tan:#352C1F; --tan2:#46392A;
+      --gold:#E5B95C; --gold-light:#F2D08A; --gold-text:#2E1E04;
+      --green:#7DBB63; --green-bg:#243520; --green-text:#E4F3DA;
+      --red:#F0604F; --red-bg:#43201A; --red-text:#FFE2DC;
       --shadow: 0 14px 34px -16px rgba(0,0,0,.6);
     }
   }
@@ -176,8 +176,8 @@
   .answer-de{ font-size:.82rem; opacity:.7; margin-top:-6px; }
   .gradebtns{ display:flex; gap:12px; margin-top:4px; flex-wrap:wrap; justify-content:center; }
   .gradebtn{ border:none; border-radius:16px; padding:13px 26px; font-family:inherit; font-size:.95rem; font-weight:700; cursor:pointer; min-width:120px; }
-  .gradebtn.ok{ background:var(--green); color:var(--green-text); }
-  .gradebtn.no{ background:var(--red); color:var(--red-text); }
+  .gradebtn.ok{ background:var(--green); color:#fff; }
+  .gradebtn.no{ background:var(--red); color:#fff; }
   .listen{ background:rgba(245,234,204,.12); color:var(--dark-text); border:1px solid rgba(245,234,204,.25); border-radius:11px; padding:6px 12px;
     font-family:inherit; font-size:.75rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
   .listen svg{ width:14px; height:14px; }
