@@ -8,7 +8,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#4C4128">
+<meta name="theme-color" content="#0E6F78">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Bayna Yadayk">
@@ -18,26 +18,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F0E4C4; --bg-blob:#DCE6B8;
-    --card:#F8F0DC; --border:#E2D0A0;
-    --text:#382C16; --text-dim:#8C7A50;
-    --dark:#4C4128; --dark2:#2E2515; --dark-text:#FBF2DC;
-    --tan:#DCC488; --tan2:#CDAD6C;
-    --gold:#D2A84E; --gold-light:#E5C378; --gold-text:#3E2E10;
-    --green:#7B9450; --green-bg:#E6EAD2; --green-text:#2A3316;
-    --red:#C06238; --red-bg:#F6E3D3; --red-text:#4A2311;
-    --shadow: 0 14px 34px -16px rgba(76,65,40,.3);
+    --bg:#F4F8F7; --bg-blob:#CFF1EA; --bg-blob2:#FFE1D2;
+    --card:#FFFFFF; --border:#E2ECE9;
+    --text:#173836; --text-dim:#5F7F7B;
+    --dark:#14A08F; --dark2:#0E6F78; --dark-text:#F2FFFC;
+    --tan:#EEF6F4; --tan2:#D4EDE7;
+    --gold:#F59E0B; --gold-light:#FFD166; --gold-text:#3D2500;
+    --green:#2FBF71; --green-bg:#DDF7E8; --green-text:#063D21;
+    --red:#F2685B; --red-bg:#FFE6E2; --red-text:#5C140D;
+    --m1a:#16B3A0; --m1b:#0E7C86;   /* Dialoge */
+    --m2a:#7C6CF2; --m2b:#4F46C8;   /* Fragen */
+    --m3a:#FF8A5B; --m3b:#E8573F;   /* Sätze */
+    --m4a:#F25C84; --m4b:#C2325E;   /* Fehler */
+    --shadow: 0 14px 34px -18px rgba(14,111,120,.35);
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --bg:#211C10; --bg-blob:#2E2A16;
-      --card:#2A2415; --border:#413419;
-      --text:#F3E7CB; --text-dim:#B5A273;
-      --dark:#3A3018; --dark2:#1C1709; --dark-text:#F3E7CB;
-      --tan:#3C3117; --tan2:#4A3C1E;
-      --gold:#E0B968; --gold-light:#EFD08C; --gold-text:#2A1D08;
-      --green:#93AC69; --green-bg:#2C3820; --green-text:#E7EED6;
-      --red:#D47C52; --red-bg:#402A1C; --red-text:#F8E4D3;
+      --bg:#0D1A1D; --bg-blob:#103B3A; --bg-blob2:#3A2320;
+      --card:#152629; --border:#24403F;
+      --text:#E8F6F3; --text-dim:#93B4AF;
+      --dark:#11806F; --dark2:#0A4E56; --dark-text:#F2FFFC;
+      --tan:#1B3133; --tan2:#22494A;
+      --gold:#FBBF24; --gold-light:#FFD978; --gold-text:#2E1C00;
+      --green:#3DD487; --green-bg:#173C2B; --green-text:#E2FBEE;
+      --red:#FF7C70; --red-bg:#43201C; --red-text:#FFE6E2;
       --shadow: 0 14px 34px -16px rgba(0,0,0,.6);
     }
   }
@@ -45,8 +49,8 @@
   html,body{margin:0;padding:0;}
   body{
     background:
-      radial-gradient(circle at 100% -10%, var(--bg-blob) 0%, transparent 42%),
-      radial-gradient(circle at -10% 30%, var(--bg-blob) 0%, transparent 38%),
+      radial-gradient(circle at 100% -10%, var(--bg-blob) 0%, transparent 45%),
+      radial-gradient(circle at -10% 35%, var(--bg-blob2) 0%, transparent 40%),
       var(--bg);
     color:var(--text);
     font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
@@ -88,7 +92,8 @@
   .unit .num{ font-size:.66rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
   .unit .uar{ display:block; font-size:1.02rem; font-weight:700; color:var(--text); line-height:1.5; margin:2px 0 0; }
   .unit .ude{ display:block; font-size:.68rem; font-weight:600; }
-  .unit.on{ border-color:var(--gold); background:linear-gradient(160deg, var(--gold-light), var(--tan2)); color:var(--gold-text); }
+  .unit:hover{ border-color:var(--gold-light); }
+  .unit.on{ border-color:var(--gold); background:linear-gradient(160deg, var(--gold-light), var(--gold)); color:var(--gold-text); box-shadow:0 8px 18px -10px var(--gold); }
   .unit.on .uar{ color:var(--gold-text); }
   .unit .badge-err{ position:absolute; top:5px; inset-inline-end:6px; background:var(--red); color:#fff; border-radius:9px; font-size:.6rem; font-weight:800; padding:1px 6px; }
 
@@ -98,18 +103,22 @@
   .btn-small{ padding:6px 11px; font-size:.75rem; border-radius:10px; }
   .btn:active{ transform:scale(.97); }
   .btn:disabled{ opacity:.4; cursor:default; }
-  .hero .btn-ghost{ background:rgba(245,234,204,.12); color:var(--dark-text); border-color:rgba(245,234,204,.25); }
+  .hero .btn-ghost{ background:rgba(255,255,255,.14); color:var(--dark-text); border-color:rgba(255,255,255,.3); }
 
   /* Modus-Karten */
   .modes{ display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; }
-  .mode{ background:linear-gradient(150deg, var(--dark), var(--dark2)); color:var(--dark-text); border-radius:20px; padding:16px 16px 14px; cursor:pointer;
-    border:1px solid var(--dark2); box-shadow:var(--shadow); text-align:start; font-family:inherit; position:relative; overflow:hidden; }
+  .mode{ --a:var(--m1a); --b:var(--m1b); background:linear-gradient(145deg, var(--a), var(--b)); color:#fff; border-radius:22px; padding:16px 16px 14px; cursor:pointer;
+    border:none; box-shadow:0 14px 28px -16px var(--b); text-align:start; font-family:inherit; position:relative; overflow:hidden; transition:transform .15s; }
+  .mode::after{ content:""; position:absolute; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,.12); top:-40px; inset-inline-end:-40px; }
+  .mode:hover{ transform:translateY(-2px); }
   .mode:active{ transform:scale(.98); }
-  .mode .t{ font-weight:800; font-size:1rem; display:block; }
-  .mode .ar{ display:block; color:var(--gold-light); font-size:1.1rem; margin:2px 0 4px; text-align:start; }
-  .mode .d{ display:block; font-size:.74rem; opacity:.72; line-height:1.4; }
-  .mode .cnt{ position:absolute; top:12px; inset-inline-end:14px; font-size:.68rem; font-weight:800; color:var(--gold-light); opacity:.9; }
-  .mode.err{ background:linear-gradient(150deg, #7A3A20, #4A2311); border-color:#4A2311; }
+  .mode .t{ font-weight:800; font-size:1.02rem; display:block; }
+  .mode .ar{ display:block; color:#fff; opacity:.9; font-size:1.1rem; margin:2px 0 4px; text-align:start; }
+  .mode .d{ display:block; font-size:.74rem; opacity:.85; line-height:1.4; }
+  .mode .cnt{ position:absolute; top:12px; inset-inline-end:14px; font-size:.7rem; font-weight:800; background:rgba(255,255,255,.22); border-radius:10px; padding:2px 8px; z-index:1; }
+  .mode.q{ --a:var(--m2a); --b:var(--m2b); }
+  .mode.s{ --a:var(--m3a); --b:var(--m3b); }
+  .mode.err{ --a:var(--m4a); --b:var(--m4b); }
   .mode:disabled{ opacity:.45; cursor:default; }
   @media (max-width:480px){ .modes{ grid-template-columns:1fr; } }
 
@@ -302,7 +311,7 @@ function renderHome(){
   </header>
 
   <div class="panel">
-    <h2>Einheiten <span class="right"><button class="btn btn-ghost btn-small" id="selAll">Alle</button> <button class="btn btn-ghost btn-small" id="selNone">Keine</button></span></h2>
+    <h2>Einheiten</h2>
     <div class="units">
       ${UNITS.map(u=>`
         <div class="unit ${sel.includes(u.id)?'on':''}" data-id="${u.id}">
@@ -320,22 +329,17 @@ function renderHome(){
       <span class="t">Dialoge</span><span class="ar">الحِوارُ</span>
       <span class="d">Du übernimmst eine Rolle. Dein Gegenüber spricht Arabisch, du antwortest – das Deutsche steht als Hilfe da.</span>
     </button>
-    <button class="mode" id="mQ" ${sel.length?'':'disabled'}>
+    <button class="mode q" id="mQ" ${sel.length?'':'disabled'}>
       <span class="cnt">${cnt.q}</span>
       <span class="t">Fragen beantworten</span><span class="ar">أَجِبْ عَنِ الأَسْئِلَةِ</span>
       <span class="d">Die Fragen vom Kapitelende: Arabische Frage, du antwortest auf Arabisch.</span>
     </button>
-    <button class="mode" id="mS" ${sel.length?'':'disabled'}>
+    <button class="mode s" id="mS" ${sel.length?'':'disabled'}>
       <span class="cnt">${cnt.s}</span>
       <span class="t">Sätze übersetzen</span><span class="ar">تَرْجِمْ</span>
       <span class="d">Deutscher Satz → du sagst/schreibst ihn auf Arabisch. Sätze aus Dialogen, Strukturtabellen und Lesetexten.</span>
     </button>
-    <button class="mode" id="mMix" ${sel.length?'':'disabled'}>
-      <span class="cnt">${cnt.s+cnt.q}</span>
-      <span class="t">Gemischt</span><span class="ar">مُراجَعَةٌ</span>
-      <span class="d">Sätze und Fragen der gewählten Einheiten durcheinander.</span>
-    </button>
-    <button class="mode err" id="mErr" ${errAll?'':'disabled'} style="grid-column:1/-1">
+    <button class="mode err" id="mErr" ${errAll?'':'disabled'}>
       <span class="cnt">${errAll}</span>
       <span class="t">Fehler wiederholen</span><span class="ar">الأَخْطاءُ</span>
       <span class="d">${errAll ? `Alles, was du als „Falsch“ markiert hast. ${errSel!==errAll?`(${errSel} davon in den gewählten Einheiten)`:''} Richtig beantwortet → verschwindet aus der Liste.` : 'Noch keine Fehler gespeichert. Alles, was du als „Falsch“ markierst, landet hier.'}</span>
@@ -362,14 +366,11 @@ function renderHome(){
     if(i>=0) store.units.splice(i,1); else store.units.push(id);
     store.units.sort((a,b)=>a-b); save(); renderHome();
   });
-  $('#selAll').onclick = ()=>{ store.units = UNITS.map(u=>u.id); save(); renderHome(); };
-  $('#selNone').onclick = ()=>{ store.units = []; save(); renderHome(); };
   $('#tDe').onclick = ()=>{ store.showDe = !store.showDe; save(); renderHome(); };
   $('#tType').onclick = ()=>{ store.typing = !store.typing; save(); renderHome(); };
   $('#mDialog').onclick = renderDialogPicker;
   $('#mQ').onclick = ()=>startDrill('q');
   $('#mS').onclick = ()=>startDrill('s');
-  $('#mMix').onclick = ()=>startDrill('mix');
   $('#mErr').onclick = ()=>startDrill('err');
   const se = $('#showErr'); if(se) se.onclick = renderErrorList;
   window.scrollTo(0,0);
@@ -406,7 +407,7 @@ function renderDialogPicker(){
 ========================================================= */
 function startDialog(unitId, dIdx, role){
   const d = UNIT(unitId).d[dIdx];
-  session = { kind:'dialog', unitId, dIdx, role, d, pos:0, stage:0, ok:0, no:0, tries:0, history:[], typed:'' };
+  session = { kind:'dialog', unitId, dIdx, role, d, pos:0, stage:0, ok:0, no:0, history:[], typed:'' };
   advanceDialog();
 }
 function isMine(line){ return session.role==='*' || line[0]===session.role; }
@@ -416,7 +417,7 @@ function advanceDialog(){
   while(s.pos < s.d.l.length && !isMine(s.d.l[s.pos])){
     s.history.push({me:false, line:s.d.l[s.pos]}); s.pos++;
   }
-  s.stage = 0; s.typed = ''; s.tries = 0;
+  s.stage = 0; s.typed = '';
   renderDialog();
   const last = s.history[s.history.length-1];
   if(last && !last.me && s.autoSpeak) speak(last.line[1]);
@@ -437,7 +438,7 @@ function renderDialog(){
     card = `<div class="panel hero quiz summary">
       <div style="font-weight:700">${esc(d.t)}</div>
       <div class="score"><span class="ok">${s.ok}</span> / ${mineTotal}</div>
-      <div style="opacity:.7;font-size:.85rem">${s.ok} beim ersten Versuch richtig · ${s.no} Mal falsch</div>
+      <div style="opacity:.7;font-size:.85rem">${s.ok} richtig · ${s.no} falsch</div>
       <div class="summary-actions">
         <button class="btn btn-ghost" id="again">Nochmal</button>
         <button class="btn btn-ghost" id="other">Andere Rolle / Dialog</button>
@@ -445,7 +446,7 @@ function renderDialog(){
       </div></div>`;
   } else {
     const line = d.l[s.pos];
-    const head = `<div class="badges"><span class="badge">Du bist: ${esc(line[0])}</span>${s.tries?`<span class="badge" style="color:#F4C2A6">Versuch ${s.tries+1}</span>`:''}</div>
+    const head = `<div class="badges"><span class="badge">Du bist: ${esc(line[0])}</span></div>
       <div class="task">Sag das auf Arabisch</div>
       <div class="de-big">${esc(line[2])}</div>`;
     card = `<div class="panel hero quiz">${head}${answerZone(line[1], null)}</div>`;
@@ -468,14 +469,10 @@ function renderDialog(){
   } else {
     wireAnswer(d.l[s.pos][1], ok=>{
       const key = `d|${s.unitId}|${s.dIdx}|${s.pos}`;
-      if(ok){
-        if(s.tries===0) s.ok++;
-        store.stats.ok++; if(s.tries===0) removeMistake(key);
-        s.history.push({me:true, line:d.l[s.pos], wrong:s.tries>0}); s.pos++; save(); advanceDialog();
-      } else {
-        s.no++; s.tries++; store.stats.no++; addMistake(key);
-        s.stage = 0; s.typed = ''; renderDialog();   // gleiche Zeile nochmal
-      }
+      // Richtig oder falsch: die Zeile kommt in den Verlauf (falsch = rot) und der Dialog läuft weiter
+      if(ok){ s.ok++; store.stats.ok++; removeMistake(key); }
+      else  { s.no++; store.stats.no++; addMistake(key); }
+      s.history.push({me:true, line:d.l[s.pos], wrong:!ok}); s.pos++; save(); advanceDialog();
     }, renderDialog);
   }
   const chatEl = document.querySelector('.chat'); const last = chatEl && chatEl.lastElementChild;
@@ -536,12 +533,12 @@ function buildQueue(kind){
   const keys = [];
   if(kind==='err') return shuffle(mistakeKeys(null));
   store.units.forEach(id=>{ const u = UNIT(id);
-    if(kind==='s'||kind==='mix') u.s.forEach((_,i)=>keys.push(`s|${id}|${i}`));
-    if(kind==='q'||kind==='mix') u.q.forEach((_,i)=>keys.push(`q|${id}|${i}`));
+    if(kind==='s') u.s.forEach((_,i)=>keys.push(`s|${id}|${i}`));
+    if(kind==='q') u.q.forEach((_,i)=>keys.push(`q|${id}|${i}`));
   });
   return shuffle(keys);
 }
-const KIND_NAME = { s:'Sätze übersetzen', q:'Fragen beantworten', mix:'Gemischt', err:'Fehler wiederholen' };
+const KIND_NAME = { s:'Sätze übersetzen', q:'Fragen beantworten', err:'Fehler wiederholen' };
 
 function startDrill(kind){
   const queue = buildQueue(kind);
